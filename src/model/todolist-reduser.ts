@@ -1,5 +1,5 @@
 import {v1} from 'uuid'
-import {TodolistType} from "../App";
+import {FilterValuesType, TodolistType} from "../App";
 
 
 type ActionRemovetodoAC = {
@@ -15,7 +15,22 @@ type ActionAddAC = {
 	}
 }
 
-type ActionsType = ActionRemovetodoAC | ActionAddAC
+type ActionChanfeTodoAC = {
+	type: 'CHANGE-TODOLIST-TITLE',
+	payload: {
+		id: string,
+			title: string,
+	},
+}
+type ActionChanfeTodoFilterAC = {
+	type: 'CHANGE-TODOLIST-FILTER',
+	payload: {
+		id: string
+		filter: FilterValuesType,
+	},
+}
+
+type ActionsType = ActionRemovetodoAC | ActionAddAC | ActionChanfeTodoAC |ActionChanfeTodoFilterAC
 
 let todolistID1 = v1()
 let todolistID2 = v1()
@@ -34,6 +49,15 @@ export const todolistsReducer = (state: TodolistType[] = initialState, action: A
 		case"ADD-TODOLIST": {
 			const newTodolist: TodolistType = {id: v1(), title: action.payload.title, filter: 'all'}
 			return [...state, newTodolist]
+		}
+
+		case "CHANGE-TODOLIST-TITLE":{
+			return state.map(tl => tl.id === action.payload.id ? {...tl, title: action.payload.title} : tl)
+		}
+		case "CHANGE-TODOLIST-FILTER":{
+
+		return  state.map(tl => tl.id === action.payload.id ? {...tl, filter: action.payload.filter} : tl)
+
 		}
 		default:
 			throw new Error("WRONG!")
