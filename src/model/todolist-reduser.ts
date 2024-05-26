@@ -15,14 +15,14 @@ type ActionAddAC = {
 	}
 }
 
-type ActionChanfeTodoAC = {
+type ActionChangeTodoAC = {
 	type: 'CHANGE-TODOLIST-TITLE',
 	payload: {
 		id: string,
 		title: string,
 	},
 }
-type ActionChanfeTodoFilterAC = {
+type ActionChangeTodoFilterAC = {
 	type: 'CHANGE-TODOLIST-FILTER',
 	payload: {
 		id: string
@@ -33,8 +33,8 @@ type ActionChanfeTodoFilterAC = {
 type ActionsType =
 	ActionRemovetodoAC |
 	ActionAddAC |
-	ActionChanfeTodoAC |
-	ActionChanfeTodoFilterAC
+	ActionChangeTodoAC |
+	ActionChangeTodoFilterAC
 
 let todolistID1 = v1()
 let todolistID2 = v1()
