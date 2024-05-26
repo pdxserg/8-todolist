@@ -31,10 +31,10 @@ type ActionChangeTodoFilterAC = {
 }
 
 type ActionsType =
-	ActionRemovetodoAC |
-	ActionAddAC |
-	ActionChangeTodoAC |
-	ActionChangeTodoFilterAC
+	| ActionRemovetodoAC
+	| ActionAddAC
+	| ActionChangeTodoAC
+	| ActionChangeTodoFilterAC
 
 let todolistID1 = v1()
 let todolistID2 = v1()
@@ -65,4 +65,38 @@ export const todolistsReducer = (state: TodolistType[] = initialState, action: A
 		default:
 			throw new Error("WRONG!")
 	}
+}
+export const removeTodoAC =(id:string)=>{
+	return{
+		type: 'REMOVE-TODOLIST',
+		payload: {
+			id: id,
+		},
+	} as const
+}
+export const addTodoAC =(title:string)=>{
+	return{
+		type: 'ADD-TODOLIST',
+		payload: {
+			title: title,
+		},
+	} as  const
+}
+export const changeTitleTodoAC =(id: string, title:string)=>{
+	return{
+		type: 'CHANGE-TODOLIST-TITLE',
+		payload: {
+			id: id,
+			title:title
+		},
+	}as const
+}
+export const changeFilterTodoAC =(id: string, filter:FilterValuesType)=>{
+	return{
+		type: 'CHANGE-TODOLIST-FILTER',
+		payload: {
+			id: id,
+			filter: filter,
+		},
+	}as const
 }
